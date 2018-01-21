@@ -1,0 +1,21 @@
+a)We use in-sorder traversal to print the nodes because we will get a sorted list of node items. To delet all nodes in a tree, nodes must be deleted in such order that a node can only be deleted after its left and right subtrees have been deleted. Post-order traversal traverses the left subtree, right subtree and then the the current node, which meets the requirement.
+
+b)Example:
+template <typename Data>
+std::ostream & operator<<(std::ostream& stm, const BSTNode<Data> & n) {
+  stm << '[';
+  stm << std::setw(10) << &n;                 // address of the BSTNode
+  stm << "; p:" << std::setw(10) << n.parent; // address of its parent
+  stm << "; l:" << std::setw(10) << n.left;   // address of its left child
+  stm << "; r:" << std::setw(10) << n.right;  // address of its right child
+  stm << "; d:" << n.data;                    // its data field
+  stm << ']';
+  return stm;
+}
+
+operator << is overloaded
+'<<'has expression 'cout << node' where node is a BSTNode
+example:
+BSTNode<int>* newNode = new BSTNode<int>(5);
+cout << newNode;
+

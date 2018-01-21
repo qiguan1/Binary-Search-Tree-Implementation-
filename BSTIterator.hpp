@@ -1,0 +1,64 @@
+/*Name: Qihan Guan
+ *Date: Jan 14, 2016
+ *Assignment PA1
+ *BSTIterator definition file.
+*/
+#ifndef BSTITERATOR_HPP
+#define BSTITERATOR_HPP
+#include "BSTNode.hpp"
+#include <list>
+#include <iterator>
+
+template<typename Data>
+class BSTIterator : public std::iterator<std::input_iterator_tag,Data> {
+
+private:
+
+  BSTNode<Data>* curr;
+
+public:
+
+  /** Constructor.  Use the argument to initialize the current BSTNode
+   *  in this BSTIterator.
+   */
+  BSTIterator(BSTNode<Data>* curr) {
+    this->curr = curr;
+  }
+
+  /** Dereference operator. */
+  Data operator*() const {
+    return curr->data;
+  }
+  
+  /** Pre-increment operator. */
+  BSTIterator<Data>& operator++() {
+    curr = curr->successor();
+    return *this;
+  }
+
+  /** Post-increment operator. */
+  BSTIterator<Data> operator++(int) {
+    BSTIterator before = BSTIterator(curr);
+    ++(*this);
+    return before;
+  }
+
+  /** Equality test operator.
+   ** return true if the input iterator is equal to the
+   ** current one, return false otherwise
+  */ 
+  bool operator==(BSTIterator<Data> const & other) const {
+    return curr == other.curr;
+  }
+
+  /** Inequality test operator.
+   ** return true if the input iterator is not equalt to
+   ** the current one, return false otherwise
+  */ 
+  bool operator!=(BSTIterator<Data> const & other) const {
+    return curr != other.curr; 
+  }
+
+};
+
+#endif //BSTITERATOR_HPP
